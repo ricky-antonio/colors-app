@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import React, { Component } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Link } from 'react-router-dom';
 import './ColorBox.css';
 
 class ColorBox extends Component {
@@ -12,21 +13,21 @@ class ColorBox extends Component {
         this.changeCopyState = this.changeCopyState.bind(this);
     }
 
-    changeCopyState(){
-        this.setState({copied: true}, () => {
+    changeCopyState() {
+        this.setState({ copied: true }, () => {
             setTimeout(() => {
-                this.setState({copied: false})
+                this.setState({ copied: false })
             }, 1500);
         })
     }
 
     render() {
         const { name, background } = this.props;
-        const {copied} = this.state;
+        const { copied } = this.state;
         return (
             <CopyToClipboard text={background} onCopy={this.changeCopyState}>
-                <div className="ColorBox" style={{background}}>
-                    <div style={{background}} className={`ColorBox-copy-overlay ${copied && "show"}`} />
+                <div className="ColorBox" style={{ background }}>
+                    <div style={{ background }} className={`ColorBox-copy-overlay ${copied && "show"}`} />
                     <div className={`ColorBox-copy-msg ${copied && "show"}`}>
                         <h1 >Copied!</h1>
                         <p >{this.props.background}</p>
@@ -37,9 +38,11 @@ class ColorBox extends Component {
                         </div>
                         <button className="ColorBox-copy-button">Copy</button>
                     </div>
-                    <span className="ColorBox-see-more">More</span>
+                    <Link to="/" onClick={e => e.stopPropagation()}>
+                        <span className="ColorBox-see-more">More</span>
+                    </Link>
                 </div>
-                </CopyToClipboard>          
+            </CopyToClipboard>
         );
     };
 }
