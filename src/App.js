@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import seedColors from './seedColors';
+import SingleColorPalette from './SingleColorPalette';
 import { generatePalette } from './colorHelpers';
 import { FindReplaceTwoTone, ThreeSixty } from '@material-ui/icons';
 
@@ -28,7 +29,7 @@ class App extends Component {
             />
           }
         />
-        <Route path="/palette/:paletteID/:colorID" render={() => <h1>Single color page</h1>}/>
+        <Route path="/palette/:paletteID/:colorID" render={() => <SingleColorPalette />}/>
       </Switch>
     );
   }
