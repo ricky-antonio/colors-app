@@ -91,15 +91,15 @@ class NewPaletteForm extends Component {
         }
     }
 
-    componentDidMount(){
-        ValidatorForm.addValidationRule('isColorNameUnique', (value) => 
+    componentDidMount() {
+        ValidatorForm.addValidationRule('isColorNameUnique', (value) =>
             this.state.colors.every(
-                ({name}) => name.toLowerCase() !== value.toLowerCase()
+                ({ name }) => name.toLowerCase() !== value.toLowerCase()
             )
         );
-        ValidatorForm.addValidationRule('isColorUnique', (value) => 
+        ValidatorForm.addValidationRule('isColorUnique', (value) =>
             this.state.colors.every(
-                ({color}) => color !== this.state.currentColor
+                ({ color }) => color !== this.state.currentColor
             )
         );
     }
@@ -113,7 +113,6 @@ class NewPaletteForm extends Component {
     };
 
     updateCurrentColor = (newColor) => {
-        console.log(newColor.hex)
         this.setState({ currentColor: newColor.hex })
     }
 
@@ -129,6 +128,17 @@ class NewPaletteForm extends Component {
         this.setState({ newName: evt.target.value })
     }
 
+    handleSubmit = () => {
+        let newName = "New Test Palette"
+        const newPalette = {
+            paletteName: newName, 
+            colors: this.state.colors,
+            id: newName.toLowerCase().replace(/ /g, '-')
+        }
+        this.props.savePalette(newPalette);
+        this.props.history.push("/");
+    }
+
     render() {
         const { classes } = this.props;
         const { open } = this.state;
@@ -138,6 +148,7 @@ class NewPaletteForm extends Component {
                 <CssBaseline />
                 <AppBar
                     position="fixed"
+                    color="default"
                     className={classNames(classes.appBar, {
                         [classes.appBarShift]: open,
                     })}
@@ -153,7 +164,14 @@ class NewPaletteForm extends Component {
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
                             Persistent drawer
-                </Typography>
+                        </Typography>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            onClick={this.handleSubmit}
+                        >
+                            Save Palette
+                        </Button>
                     </Toolbar>
                 </AppBar>
                 <Drawer
