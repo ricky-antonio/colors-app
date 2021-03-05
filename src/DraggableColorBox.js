@@ -5,14 +5,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 
 function DraggableColorBox(props) {
+    const {classes, color, handleClick, name } = props;
     return (
         <div 
-        className={props.classes.root}
-        style={{backgroundColor: props.color}}
+        className={classes.root}
+        style={{backgroundColor: color}}
         >
-            <div className={props.classes.boxContent}>
-                <span>{props.name}</span>
-                <DeleteIcon className={props.classes.DeleteIcon}/>
+            <div className={classes.boxContent}>
+                <span>{name}</span>
+                <DeleteIcon 
+                    className={classes.DeleteIcon}
+                    onClick={handleClick}
+                />
             </div>
         </div>
     )
