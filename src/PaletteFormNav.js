@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import PaletteMetaForm from './PaletteMetaForm'; 
+import PaletteMetaForm from './PaletteMetaForm';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,24 +10,29 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
-
 import styles from './styles/PaletteFormNavStyles';
 
 class PaletteFormNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newPaletteName: ""
+            newPaletteName: "",
+            formShowing: false
         }
     }
 
-    
+    handleChange = (evt) => {
+        this.setState({ [evt.target.name]: evt.target.value })
+    }
 
-    
+    toggleForm = () => {
+        this.setState({formShowing: true})
+    }
+
 
     render() {
         const { classes, open, palettes, handleSubmit } = this.props;
-        
+
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -52,12 +57,28 @@ class PaletteFormNav extends Component {
                         </Typography>
                     </Toolbar>
                     <div className={classes.navBtns}>
-                        <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
                         <Link to="/">
-                            <Button variant="contained" color="secondary">Go Back</Button>
+                            <Button 
+                                variant="contained" 
+                                color="secondary" 
+                                className={classes.button}
+                            >
+                                Go Back
+                            </Button>
                         </Link>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={this.toggleForm}
+                            className={classes.button}
+                        >
+                            Save
+                        </Button>
                     </div>
                 </AppBar>
+                {this.state.formShowing && (
+                    <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+                )}
             </div>
         )
     }
