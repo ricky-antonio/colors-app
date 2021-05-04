@@ -26,7 +26,7 @@ class PaletteFormNav extends Component {
     }
 
     toggleForm = () => {
-        this.setState({formShowing: true})
+        this.setState({formShowing: !this.state.formShowing})
     }
 
 
@@ -77,7 +77,7 @@ class PaletteFormNav extends Component {
                     </div>
                 </AppBar>
                 {this.state.formShowing && (
-                    <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
+                    <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} toggleForm={this.toggleForm}/>
                 )}
             </div>
         )
