@@ -6,8 +6,6 @@ import seedColors from './seedColors';
 import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
 import { generatePalette } from './colorHelpers';
-import { FindReplaceTwoTone, ThreeSixty } from '@material-ui/icons';
-
 
 class App extends Component {
 	constructor(props) {
