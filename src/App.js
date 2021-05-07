@@ -33,11 +33,6 @@ class App extends Component {
 			st => ({ palettes: st.palettes.filter(palette => palette.id !== id) }),
 			this.syncLocalStorage
 		);
-
-		// this.setState(
-		// 	{ palettes: this.state.palettes.filter(palette => palette.id !== id) },
-		// 	this.syncLocalStorage
-		// );
 	};
 
 	savePalette(newPalette) {
