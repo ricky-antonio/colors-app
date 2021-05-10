@@ -54,7 +54,7 @@ class PaletteMetaForm extends Component {
 
     render() {
         const { newPaletteName, stage } = this.state;
-        const { toggleForm, handleSubmit } = this.props;
+        const { toggleForm } = this.props;
 
         return (
             <>
